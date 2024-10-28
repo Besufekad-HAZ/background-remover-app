@@ -31,6 +31,7 @@ const BgSlider = () => {
         />
         {/* Slider */}
         <input
+          className="aboslute slider left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2 transform"
           type="range"
           min="0"
           max="100"
