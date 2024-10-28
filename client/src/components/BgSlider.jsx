@@ -9,14 +9,10 @@ const BgSlider = () => {
 
   return (
     <div>
-      <input
-        type="range"
-        min="0"
-        max="500"
-        value={sliderPosition}
-        onChange={handleSliderChange}
-      />
-      <p>Slider Position: {sliderPosition}</p>
+      {/* Title*/}
+      <h2 className="mt-4 bg-gradient-to-r from-gray-900 to-gray-400 bg-clip-text pb-2 text-center text-2xl font-semibold text-transparent md:text-3xl lg:text-4xl">
+        Remove Background With High <br /> Quality and Accuracy
+      </h2>
     </div>
   );
 };
