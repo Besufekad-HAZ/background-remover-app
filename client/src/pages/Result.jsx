@@ -9,17 +9,17 @@ const Result = () => {
         <div className="flex">
           {/* Left Side (Original Image)*/}
           <div>
-            <h2 className="mb-4 mt-4 bg-gradient-to-r from-gray-900 to-gray-400 bg-clip-text pb-2 text-center text-2xl font-semibold text-transparent sm:mb-20 md:text-3xl lg:text-4xl">
+            <p className="mb-4 mt-4 bg-gradient-to-r from-gray-900 to-gray-400 bg-clip-text pb-2 text-center text-2xl font-semibold text-transparent sm:mb-20 md:text-3xl lg:text-4xl">
               Original Image
-            </h2>
+            </p>
             <img width={500} src={assets.image_w_bg} alt="Original Image" />
           </div>
 
           {/* Right Side (Result Image)*/}
           <div>
-            <h2 className="mb-4 mt-4 bg-gradient-to-r from-gray-900 to-gray-400 bg-clip-text pb-2 text-center text-2xl font-semibold text-transparent sm:mb-20 md:text-3xl lg:text-4xl">
-              Result Image
-            </h2>
+            <p className="mb-4 mt-4 bg-gradient-to-r from-gray-900 to-gray-400 bg-clip-text pb-2 text-center text-2xl font-semibold text-transparent sm:mb-20 md:text-3xl lg:text-4xl">
+              Background Removed
+            </p>
             <img width={500} src={assets.image_wo_bg} alt="Result Image" />
           </div>
         </div>
