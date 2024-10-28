@@ -11,16 +11,20 @@ const Testimonials = () => {
         {/* Testimonial */}
         {testimonialsData.map((item, index) => (
           <div
-            className="mx-auto max-w-lg rounded-xl bg-white p-6 drop-shadow-md hover:scale-105 transition-all duration-700"
+            className="mx-auto max-w-lg rounded-xl bg-white p-6 drop-shadow-md transition-all duration-700 hover:scale-105"
             key={index}
           >
-            <p>”</p>
-            <p>{item.text}</p>
-            <div>
-              <img src={item.image} alt="testimonial avatar image" />
+            <p className="text-4xl text-gray-500">”</p>
+            <p className="text-sm text-gray-500">{item.text}</p>
+            <div className="mt-5 flex items-center gap-3">
+              <img
+                className="w-[3rem] rounded-full lg:w-[4rem]"
+                src={item.image}
+                alt="testimonial avatar image"
+              />
               <div>
-                <p>{item.author}</p>
-                <p>{item.jobTitle}</p>
+                <p className="font-semibold">{item.author}</p>
+                <p className="text-sm text-gray-600">{item.jobTitle}</p>
               </div>
             </div>
           </div>
