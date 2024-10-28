@@ -11,7 +11,7 @@ const Testimonials = () => {
         {/* Testimonial */}
         {testimonialsData.map((item, index) => (
           <div
-            className="mx-auto max-w-lg rounded-xl bg-white p-6 drop-shadow-md"
+            className="mx-auto max-w-lg rounded-xl bg-white p-6 drop-shadow-md hover:scale-105 transition-all duration-700"
             key={index}
           >
             <p>”</p>
