@@ -13,13 +13,16 @@ const Header = () => {
           from <br />
           your images for free.
         </h1>
-        <p>
+        <p className="my-6 text-[15px] text-gray-500">
           Upload your image and get a clean, <br /> transparent background in
           seconds.
         </p>
         <div>
           <input type="file" name="" id="upload1" hidden />
-          <label htmlFor="upload1">
+          <label
+            className="m-auto inline-flex cursor-pointer gap-3 bg-gradient-to-r from-orange-700 to-orange-400 px-8 py-3.5 transition-all duration-700 hover:scale-105"
+            htmlFor="upload1"
+          >
             <img src={assets.upload_btn_icon} alt="" />
             <p>Upload your image</p>
           </label>
@@ -27,7 +30,7 @@ const Header = () => {
       </div>
       {/* Right side  */}
       <div>
-        <h1>Holaaaaaa</h1>
+        <h2>Holaaaaaa</h2>
       </div>
     </div>
   );

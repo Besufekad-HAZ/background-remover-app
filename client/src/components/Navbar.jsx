@@ -1,5 +1,5 @@
-import { assets } from "../assets/assets";
-import { Link } from "react-router-dom";
+import { assets } from '../assets/assets';
+import { Link } from 'react-router-dom';
 const Navbar = () => {
   return (
     <div className="mx-4 flex items-center justify-between py-3 lg:mx-44">
