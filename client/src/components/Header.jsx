@@ -29,8 +29,8 @@ const Header = () => {
         </div>
       </div>
       {/* Right side  */}
-      <div>
-        <h2>Holaaaaaa</h2>
+      <div className="w-full max-w-md">
+        <img src={assets.header_img} alt="Right side header image" />
       </div>
     </div>
   );
