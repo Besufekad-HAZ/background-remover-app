@@ -2,7 +2,7 @@ import { useState } from "react";
 import { assets } from "../assets/assets";
 
 const BgSlider = () => {
-  const [sliderPosition, setSliderPosition] = useState(80);
+  const [sliderPosition, setSliderPosition] = useState(50);
 
   const handleSliderChange = (e) => {
     setSliderPosition(e.target.value);
@@ -22,6 +22,20 @@ const BgSlider = () => {
           alt="image with background for slider"
           style={{ clipPath: `inset(0 ${100.2 - sliderPosition}% 0 0)` }}
         />
+        {/* Foreground Image */}
+        <img
+          src={assets.image_wo_bg}
+          alt="image without background for slider"
+          style={{ clipPath: `inset(0 0 0 ${sliderPosition}%)` }}
+        />
+        {/* <input
+          type="range"
+          min="0"
+          max="100"
+          value={sliderPosition}
+          onChange={handleSliderChange}
+          className="w-full"
+        /> */}
       </div>
     </div>
   );
