@@ -28,14 +28,14 @@ const BgSlider = () => {
           alt="image without background for slider"
           style={{ clipPath: `inset(0 0 0 ${sliderPosition}%)` }}
         />
-        {/* <input
+        {/* Slider */}
+        <input
           type="range"
           min="0"
           max="100"
           value={sliderPosition}
           onChange={handleSliderChange}
-          className="w-full"
-        /> */}
+        />
       </div>
     </div>
   );
