@@ -9,7 +9,7 @@ const BgSlider = () => {
   };
 
   return (
-    <div className="">
+    <div className="mx-2 pb-10 md:py-20">
       {/* Title*/}
       <h2 className="mb-12 mt-4 bg-gradient-to-r from-gray-900 to-gray-400 bg-clip-text pb-2 text-center text-2xl font-semibold text-transparent sm:mb-20 md:text-3xl lg:text-4xl">
         Remove Background With High <br /> Quality and Accuracy
@@ -24,7 +24,7 @@ const BgSlider = () => {
         />
         {/* Foreground Image */}
         <img
-          className="absolute left-0 top-[-1px] h-full w-full"
+          className="absolute left-0 top-0 h-full w-full"
           src={assets.image_wo_bg}
           alt="image without background for slider"
           style={{ clipPath: `inset(0 0 0 ${sliderPosition}%)` }}
