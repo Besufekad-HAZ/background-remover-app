@@ -2,9 +2,9 @@ import { assets } from "../assets/assets";
 
 const Navbar = () => {
   return (
-    <div className="flex items-center justify-between mx-4 py-3 lg:mx-44">
-      <img src={assets.logo} alt="Navbar Logo" />
-      <button className="flex justify-between">
+    <div className="mx-4 flex items-center justify-between py-3 lg:mx-44">
+      <img className="w-32 sm:w-44" src={assets.logo} alt="Navbar Logo" />
+      <button className="flex justify-between bg-zinc-800 text-white">
         Get Started
         <img
           src={assets.arrow_icon}
