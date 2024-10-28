@@ -9,7 +9,7 @@ const BgSlider = () => {
   };
 
   return (
-    <div>
+    <div className="">
       {/* Title*/}
       <h2 className="mb-12 mt-4 bg-gradient-to-r from-gray-900 to-gray-400 bg-clip-text pb-2 text-center text-2xl font-semibold text-transparent sm:mb-20 md:text-3xl lg:text-4xl">
         Remove Background With High <br /> Quality and Accuracy
