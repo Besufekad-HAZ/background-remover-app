@@ -15,7 +15,7 @@ const BgSlider = () => {
         Remove Background With High <br /> Quality and Accuracy
       </h2>
 
-      <div>
+      <div className="relative m-auto w-full max-w-3xl overflow-hidden rounded-xl">
         {/* Background Image */}
         <img
           src={assets.image_w_bg}
