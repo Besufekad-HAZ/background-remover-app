@@ -4,7 +4,7 @@ const Testimonials = () => {
   return (
     <div>
       {/* Title */}
-      <h2 className="bg-gradient-to-r from-gray-900 to-gray-500 bg-clip-text py-5 pb-2 text-center text-2xl font-semibold text-transparent md:text-3xl lg:text-4xl">
+      <h2 className="mt-10 bg-gradient-to-r from-gray-900 to-gray-400 bg-clip-text py-5 pb-2 text-center text-2xl font-semibold text-transparent sm:mb-20 md:text-3xl lg:text-4xl">
         Customer Testimonials
       </h2>
       <div className="mx-auto grid max-w-4xl grid-cols-1 gap-10 px-4 py-8 md:grid-cols-2">
