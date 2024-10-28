@@ -10,7 +10,10 @@ const Testimonials = () => {
       <div className="mx-auto grid max-w-4xl grid-cols-1 gap-10 px-4 py-8 md:grid-cols-2">
         {/* Testimonial */}
         {testimonialsData.map((item, index) => (
-          <div key={index}>
+          <div
+            className="mx-auto max-w-lg rounded-xl bg-white p-6 drop-shadow-md"
+            key={index}
+          >
             <p>”</p>
             <p>{item.text}</p>
             <div>
