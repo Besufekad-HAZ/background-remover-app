@@ -24,6 +24,7 @@ const BgSlider = () => {
         />
         {/* Foreground Image */}
         <img
+          className="absolute left-0 top-0 h-full w-full"
           src={assets.image_wo_bg}
           alt="image without background for slider"
           style={{ clipPath: `inset(0 0 0 ${sliderPosition}%)` }}
