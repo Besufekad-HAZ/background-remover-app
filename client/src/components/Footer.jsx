@@ -4,7 +4,7 @@ const Footer = () => {
   return (
     <div className="flex items-center justify-between gap-4 px-4 py-3 lg:px-44">
       <img width={150} src={assets.logo} alt="Logo icon for the footer" />
-      <p className="text-neutral-500">
+      <p className="border-1 flex-1 border-gray-400 pl-4 text-sm text-gray-500 max-sm:hidden">
         © 2024 Remove Background. All rights reserved.
       </p>
       <div>
