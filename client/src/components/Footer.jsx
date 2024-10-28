@@ -2,7 +2,7 @@ import { assets } from "../assets/assets";
 
 const Footer = () => {
   return (
-    <div>
+    <div className="flex items-center justify-between gap-4 px-4 py-3 lg:px-44">
       <img src={assets.logo} alt="Logo icon for the footer" />
       <p className="text-neutral-500">
         © 2024 Remove Background. All rights reserved.
