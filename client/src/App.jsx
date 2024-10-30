@@ -4,6 +4,7 @@ import Result from "./pages/Result";
 import BuyCredit from "./pages/BuyCredit";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+
 const App = () => {
   return (
     <div className="min-h-screen bg-zinc-200">

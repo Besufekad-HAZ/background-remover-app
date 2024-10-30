@@ -9,6 +9,7 @@
 }
 
 .slider {
+  appearance: none;
   -webkit-appearance: none;
   height: 100%;
   background: transparent;
@@ -22,4 +23,8 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+}
+
+.bg-layer {
+  background-image: url(./assets/bg_layer.png);
 }
