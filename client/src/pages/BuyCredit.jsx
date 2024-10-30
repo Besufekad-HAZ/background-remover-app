@@ -23,7 +23,7 @@ const BuyCredit = () => {
               <span className="text-3xl font-medium">${item.price}</span>/{" "}
               {item.credits} credits
             </p>
-            <button className="mt-8 w-full min-w-52 rounded-md bg-gray-800 text-sm text-white">
+            <button className="mt-8 w-full min-w-52 rounded-md bg-gray-800 py-2.5 text-sm text-white">
               Purchase
             </button>
           </div>
