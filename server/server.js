@@ -13,6 +13,10 @@ import Razorpay from 'razorpay';
 const PORT = process.env.PORT || 5000;
 const app = express();
 
+// Initialize Middlewares
+app.use(express.json());
+app.use(cors());
+
 // API routes
 app.get('/', (req, res) => {
     res.status(200).send('API is running');
