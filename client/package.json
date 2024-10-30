@@ -13,8 +13,12 @@
   },
   "dependencies": {
     "@clerk/clerk-react": "^5.13.1",
+    "eslint-config-prettier": "^9.1.0",
+    "lint": "eslint \"src/**/*.{js,jsx,ts,tsx}\" --quiet",
     "prettier": "^3.3.3",
     "prettier-plugin-tailwindcss": "^0.6.8",
+    "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx}\"",
+    "format:check": "prettier --check \"src/**/*.{js,jsx,ts,tsx}\"",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.27.0",
