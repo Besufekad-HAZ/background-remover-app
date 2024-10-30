@@ -14,7 +14,7 @@ const BuyCredit = () => {
         {plans.map((item, index) => (
           <div
             key={index}
-            className="rounded-lg border bg-white px-8 py-12 text-gray-700 drop-shadow-sm"
+            className="rounded-lg border bg-white px-8 py-12 text-gray-700 drop-shadow-sm transition-all duration-500 hover:scale-105"
           >
             <img width={40} src={assets.logo_icon} alt="Logo icon" />
             <p>{item.id}</p>
