@@ -18,8 +18,8 @@ const BuyCredit = () => {
           >
             <img width={40} src={assets.logo_icon} alt="Logo icon" />
             <p className="mt-3 font-semibold">{item.id}</p>
-            <p>{item.desc}</p>
-            <p>
+            <p className="text-sm">{item.desc}</p>
+            <p className="mt-6">
               <span>${item.price}</span>/ {item.credits} credits
             </p>
             <button>Purchase</button>
