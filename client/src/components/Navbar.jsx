@@ -3,6 +3,7 @@ import { assets } from "../assets/assets";
 import { Link } from "react-router-dom";
 const Navbar = () => {
   const { openSignIn } = useClerk();
+  // eslint-disable-next-line no-unused-vars
   const { isSignedIn, user } = useUser();
   return (
     <div className="mx-4 flex items-center justify-between py-3 lg:mx-44">
