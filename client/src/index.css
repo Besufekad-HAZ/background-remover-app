@@ -9,6 +9,7 @@
 }
 
 .slider {
+  appearance: none;
   -webkit-appearance: none;
   height: 100%;
   background: transparent;
