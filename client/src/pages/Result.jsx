@@ -41,7 +41,7 @@ const Result = () => {
             Try another image
           </button>
           <a
-            className="bg-gradient-to-r from-violet-600 to-fuchsia-500 px-8 py-2.5 text-sm text-white transition-all duration-700 hover:scale-105"
+            className="rounded-full bg-gradient-to-r from-violet-600 to-fuchsia-500 px-8 py-2.5 text-sm text-white transition-all duration-700 hover:scale-105"
             href=""
           >
             Download image
