@@ -24,11 +24,14 @@ const Result = () => {
               Background Removed
             </p>
             <div className="bg-layer relative h-full overflow-hidden rounded-md border-gray-300">
-              <img
+              {/* <img
                 width={500}
                 src={assets.image_wo_bg}
                 alt="Background Removed Image"
-              />
+              /> */}
+              <div className="absolute bottom-1/2 right-1/2 translate-x-1/2 translate-y-1/2 transform">
+                <div></div>
+              </div>
             </div>
           </div>
         </div>
