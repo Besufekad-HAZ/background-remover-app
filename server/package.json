@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "server for the background removal project client app",
   "main": "server.js",
+  "type": "module",
   "scripts": {
     "start": "node server.js"
   },
