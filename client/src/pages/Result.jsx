@@ -37,7 +37,9 @@ const Result = () => {
         </div>
         {/* Buttons */}
         <div className="mt-6 flex flex-wrap items-center justify-center gap-4 sm:justify-end">
-          <button>Try another image</button>
+          <button className="rounded-full border border-violet-600 px-8 py-2.5 text-sm text-violet-600 transition-all duration-700 hover:scale-105">
+            Try another image
+          </button>
           <a href="">Download image</a>
         </div>
       </div>
