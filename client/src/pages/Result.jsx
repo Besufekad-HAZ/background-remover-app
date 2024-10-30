@@ -30,7 +30,7 @@ const Result = () => {
                 alt="Background Removed Image"
               /> */}
               <div className="absolute bottom-1/2 right-1/2 translate-x-1/2 translate-y-1/2 transform">
-                <div className="h-12 w-12 rounded-full border-4 border-violet-600 border-t-transparent"></div>
+                <div className="h-12 w-12 animate-spin rounded-full border-4 border-violet-600 border-t-transparent"></div>
               </div>
             </div>
           </div>
