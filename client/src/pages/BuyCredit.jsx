@@ -17,6 +17,7 @@ const BuyCredit = () => {
             <p>
               <span>${item.price}</span>/ {item.credits} credits
             </p>
+            <button>Purchase</button>
           </div>
         ))}
       </div>
