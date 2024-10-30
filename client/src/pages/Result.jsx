@@ -40,7 +40,12 @@ const Result = () => {
           <button className="rounded-full border border-violet-600 px-8 py-2.5 text-sm text-violet-600 transition-all duration-700 hover:scale-105">
             Try another image
           </button>
-          <a href="">Download image</a>
+          <a
+            className="bg-gradient-to-r from-violet-600 to-fuchsia-500 px-8 py-2.5 text-sm text-white transition-all duration-700 hover:scale-105"
+            href=""
+          >
+            Download image
+          </a>
         </div>
       </div>
     </div>
