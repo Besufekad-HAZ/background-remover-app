@@ -13,7 +13,7 @@ const Navbar = () => {
     if (isSignedIn) {
       loadCreditsData();
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isSignedIn]);
   return (
     <div className="mx-4 flex items-center justify-between py-3 lg:mx-44">
@@ -21,9 +21,10 @@ const Navbar = () => {
         <img className="w-32 sm:w-44" src={assets.logo} alt="Navbar Logo" />
       </Link>
       {isSignedIn ? (
-        <div>
-          <button>
-            
+        <div className="flex items-center gap-2 sm:gap-3">
+          <button className="flex items-center gap-2 rounded-full bg-blue-100 px-4 py-1.5 sm:px-7 sm:py-2.5">
+            <img width={30} src={assets.credit_icon} alt="Credit Icon" />
+            <p>Credits: {credit}</p>
           </button>
           <UserButton />
         </div>
