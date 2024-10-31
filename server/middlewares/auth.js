@@ -3,9 +3,12 @@ import jwt from "jsonwebtoken";
 // Middleware function to decode jwt token to get clerkId
 const authUser = async (req, res, next) => {
   try {
-    const token = req.header("Authorization").replace("Bearer ", "");
-    const data = jwt.verify(token, process.env.JWT_SECRET);
-    req.clerkId = data.id;
+    const { token } = req.headers;
+    if (!token) {
+      return res.json({ success: false, message: "Unauthorized Login Again" });
+    }
+    const decoded = jwt.decode(token);
+    req.body.clerkId = decoded.clerkId;
     next();
   } catch (error) {
     console.log(error.message);
