@@ -1,10 +1,20 @@
 import { useClerk, UserButton, useUser } from "@clerk/clerk-react";
 import { assets } from "../assets/assets";
 import { Link } from "react-router-dom";
+import { useContext, useEffect } from "react";
+import { AppContext } from "../context/AppContext";
 const Navbar = () => {
   const { openSignIn } = useClerk();
   // eslint-disable-next-line no-unused-vars
   const { isSignedIn, user } = useUser();
+  const { credit, loadCreditsData } = useContext(AppContext);
+
+  useEffect(() => {
+    if (isSignedIn) {
+      loadCreditsData();
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isSignedIn]);
   return (
     <div className="mx-4 flex items-center justify-between py-3 lg:mx-44">
       <Link to="/">
@@ -12,6 +22,9 @@ const Navbar = () => {
       </Link>
       {isSignedIn ? (
         <div>
+          <button>
+            
+          </button>
           <UserButton />
         </div>
       ) : (

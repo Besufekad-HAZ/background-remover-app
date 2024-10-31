@@ -21,6 +21,7 @@ const AppContextProvider = (props) => {
       });
       if (data.success) {
         setCredit(data.credits);
+        console.log(data.credits); // temporary check for data
       }
     } catch (error) {
       console.error(error);
