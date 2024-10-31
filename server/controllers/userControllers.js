@@ -25,6 +25,8 @@ const clerkWebhooks = async (req, res) => {
           photo: data.image_url,
         };
         await userModels.create(userData);
+        res.json({ success: true, message: "User created successfully" });
+        break;
       }
       case "user.updated": {
       }
