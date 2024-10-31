@@ -15,6 +15,7 @@ const Navbar = () => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isSignedIn]);
+
   return (
     <div className="mx-4 flex items-center justify-between py-3 lg:mx-44">
       <Link to="/">
@@ -28,6 +29,7 @@ const Navbar = () => {
               Credits: {credit}
             </p>
           </button>
+          <p className="">Hello, {user.firstName}</p>
           <UserButton />
         </div>
       ) : (
