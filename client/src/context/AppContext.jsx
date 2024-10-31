@@ -8,6 +8,7 @@ const AppContext = createContext();
 
 const AppContextProvider = (props) => {
   const [credit, setCredit] = useState(false);
+  const [image, setImage] = useState(false);
 
   const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
@@ -29,12 +30,24 @@ const AppContextProvider = (props) => {
     }
   };
 
+  const removeBg = async (image) => {
+    try {
+      // Implement the removeBg function here
+    } catch (error) {
+      console.error(error);
+      toast.error(error.message);
+    }
+  };
+
   const value = {
     // Add your context values here
     credit,
     setCredit,
     loadCreditsData,
     backendUrl,
+    image,
+    setImage,
+    removeBg,
   };
 
   return (
