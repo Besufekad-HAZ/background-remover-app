@@ -1,4 +1,5 @@
 import { Webhook } from "svix";
+import userModels from "../models/userModels";
 
 // API Controller Function to Manage Clerk User with database
 // http://localhost:5000/api/user/webhooks
@@ -29,6 +30,15 @@ const clerkWebhooks = async (req, res) => {
         break;
       }
       case "user.updated": {
+        const userData = {
+          email: data.email_addresses[0].email_address,
+          firstName: data.first_name,
+          lastName: data.last_name,
+          photo: data.image_url,
+        };
+        await userModels.findOneAndUpdate({ clerkId: data.id }, userData);
+        res.json({ success: true, message: "User created successfully" });
+        break;
       }
       case "user.deleted": {
       }
