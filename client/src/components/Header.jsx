@@ -1,6 +1,9 @@
+import { useContext } from "react";
 import { assets } from "../assets/assets";
+import { AppContext } from "../context/AppContext";
 
 const Header = () => {
+  const { removeBg } = useContext(AppContext);
   return (
     <div className="mt-10 flex items-center justify-between gap-y-10 px-4 max-sm:flex-col-reverse sm:mt-20 lg:px-44">
       {/* Left side  */}
