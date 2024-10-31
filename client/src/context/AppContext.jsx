@@ -1,9 +1,15 @@
-import { createContext } from "react";
+import { createContext, useState } from "react";
 import PropTypes from "prop-types";
 
 const AppContext = createContext();
 
 const AppContextProvider = (props) => {
+  const [creditor, setCreditor] = useState(false);
+
+  const loadCreditsData = async () => {
+    try {
+        
+    }
   const value = {
     // Add your context values here
   };
