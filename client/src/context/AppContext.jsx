@@ -1,3 +1,15 @@
+import { createContext } from "react";
+
 const AppContext = createContext();
 
-export default AppContext;
+const AppContextProvider = (props) => {
+  const value = {
+    // Add your context values here
+  };
+
+  return (
+    <AppContext.Provider value={value}>{props.children}</AppContext.Provider>
+  );
+};
+
+export default AppContextProvider;
