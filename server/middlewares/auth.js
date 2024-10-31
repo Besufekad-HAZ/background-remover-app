@@ -11,3 +11,5 @@ const authUser = async (req, res, next) => {
     res.status(401).send({ error: "Please authenticate using a valid token" });
   }
 };
+
+export default authUser;
