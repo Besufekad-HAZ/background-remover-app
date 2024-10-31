@@ -22,9 +22,11 @@ const Navbar = () => {
       </Link>
       {isSignedIn ? (
         <div className="flex items-center gap-2 sm:gap-3">
-          <button className="flex items-center gap-2 rounded-full bg-blue-100 px-4 py-1.5 sm:px-7 sm:py-2.5">
-            <img width={30} src={assets.credit_icon} alt="Credit Icon" />
-            <p>Credits: {credit}</p>
+          <button className="flex items-center gap-2 rounded-full bg-blue-100 px-4 py-1.5 transition-all duration-700 hover:scale-105 sm:px-7 sm:py-2.5">
+            <img className="w-6" src={assets.credit_icon} alt="Credit Icon" />
+            <p className="text-xs font-medium text-gray-600 sm:text-sm">
+              Credits: {credit}
+            </p>
           </button>
           <UserButton />
         </div>
