@@ -21,7 +21,13 @@ const Header = () => {
           transparent background in seconds.
         </p>
         <div>
-          <input type="file" name="" id="upload1" hidden />
+          <input
+            onChange={(e) => removeBg(e.target.files[0])}
+            type="file"
+            accept="image/*"
+            id="upload1"
+            hidden
+          />
           <label
             className="m-auto inline-flex cursor-pointer gap-3 rounded-full bg-gradient-to-r from-purple-700 to-pink-500 px-8 py-3.5 transition-all duration-700 hover:scale-105"
             htmlFor="upload1"
