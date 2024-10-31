@@ -2,11 +2,12 @@ import { createContext, useState } from "react";
 import PropTypes from "prop-types";
 import { useAuth } from "@clerk/clerk-react";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const AppContext = createContext();
 
 const AppContextProvider = (props) => {
-  const [creditor, setCreditor] = useState(false);
+  const [credit, setCredit] = useState(false);
 
   const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
@@ -19,15 +20,20 @@ const AppContextProvider = (props) => {
         headers: { token },
       });
       if (data.success) {
-        setCreditor(data.credits);
+        setCredit(data.credits);
       }
     } catch (error) {
       console.error(error);
+      toast.error(error.message);
     }
   };
 
   const value = {
     // Add your context values here
+    credit,
+    setCredit,
+    loadCreditsData,
+    backendUrl,
   };
 
   return (
