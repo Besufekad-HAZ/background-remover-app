@@ -41,6 +41,9 @@ const clerkWebhooks = async (req, res) => {
         break;
       }
       case "user.deleted": {
+        await userModel.findOneAndDelete({ clerkId: data.id });
+        res.json({ success: true, message: "User deleted successfully" });
+        break;
       }
       default: {
         console.log("Webhook event not found");
@@ -51,3 +54,5 @@ const clerkWebhooks = async (req, res) => {
     res.json({ sucess: false, message: error.message });
   }
 };
+
+export { clerkWebhooks };
