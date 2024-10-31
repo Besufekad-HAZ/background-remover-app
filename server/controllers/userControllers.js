@@ -24,7 +24,7 @@ const clerkWebhooks = async (req, res) => {
           lastName: data.last_name,
           photo: data.image_url,
         };
-        await User.create(userData);
+        await userModels.create(userData);
       }
       case "user.updated": {
       }
