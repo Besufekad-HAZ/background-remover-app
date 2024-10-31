@@ -37,7 +37,7 @@ const clerkWebhooks = async (req, res) => {
           photo: data.image_url,
         };
         await userModel.findOneAndUpdate({ clerkId: data.id }, userData);
-        res.json({ success: true, message: "User created successfully" });
+        res.json({ success: true, message: "User updated successfully" });
         break;
       }
       case "user.deleted": {
@@ -51,7 +51,7 @@ const clerkWebhooks = async (req, res) => {
     }
   } catch (error) {
     console.log(error.message);
-    res.json({ sucess: false, message: error.message });
+    res.json({ success: false, message: error.message });
   }
 };
 
