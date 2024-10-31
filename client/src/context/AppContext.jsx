@@ -13,8 +13,20 @@ const AppContextProvider = (props) => {
 
   const loadCreditsData = async () => {
     try {
-
+        const token = await getToken();
+        const response = await fetch(`${backendUrl}/api/user/credits`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
+        const data = await response.json();
+        setCreditor(data.creditor);
+    } catch (error) {
+        console.error(error);
     }
+  };
+
   const value = {
     // Add your context values here
   };
@@ -28,4 +40,4 @@ AppContextProvider.propTypes = {
   children: PropTypes.node.isRequired,
 };
 
-export default AppContextProvider;
+export { AppContext, AppContextProvider };
