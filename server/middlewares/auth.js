@@ -8,7 +8,8 @@ const authUser = async (req, res, next) => {
     req.clerkId = data.id;
     next();
   } catch (error) {
-    res.status(401).send({ error: "Please authenticate using a valid token" });
+    console.log(error.message);
+    res.json({ success: false, message: error.message });
   }
 };
 
