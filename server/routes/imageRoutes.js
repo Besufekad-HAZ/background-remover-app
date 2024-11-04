@@ -7,11 +7,10 @@ const imageRouter = express.Router();
 
 imageRouter.post(
   "/remove-bg",
-  authUser,
   upload.single("image"),
+  authUser,
   removeBackground
 );
 
 export default imageRouter;
 
-const router = express.Router();
