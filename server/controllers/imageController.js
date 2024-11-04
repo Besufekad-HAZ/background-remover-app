@@ -28,8 +28,19 @@ const removeBackground = async (req, res) => {
     const imageFile = fs.createReadStream(imagePath);
 
     const formData = new FormData();
-    formData.append("image", imageFile);
-    
+    formData.append("image_file", imageFile);
+
+    // Use Axios to make the API call
+    const { data } = await axois.post(
+      "https://clipdrop-api.co/remove-background/v1",
+      formData,
+      {
+        headers: {
+          "x-api-key": YOUR_API_KEY,
+        },
+        body: form,
+      }
+    );
   } catch (error) {
     console.log(error.message);
     res.json({ success: false, message: error.message });
