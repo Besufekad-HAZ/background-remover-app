@@ -44,7 +44,12 @@ const removeBackground = async (req, res) => {
 
     const base64Image = Buffer.from(data, "binary").toString("base64"); // Convert to base64 string
 
-    const resultImage = `data:image/png;base64,${base64Image}`;
+    const resultImage = `data:${req.file.mimetype};base64,${base64Image}`;
+
+    user.creditBalance = user.creditBalance - 1;
+    await user.save();
+
+    res.json({ success: true, resultImage });
   } catch (error) {
     console.log(error.message);
     res.json({ success: false, message: error.message });
