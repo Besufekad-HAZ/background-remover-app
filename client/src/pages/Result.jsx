@@ -1,6 +1,8 @@
 import { assets } from "../assets/assets";
+import { AppContext } from "../context/AppContext";
 
 const Result = () => {
+  const { resultImage, image } = useContext(AppContext);
   return (
     <div className="mx-4 my-3 mt-14 min-h-[75vh] lg:mx-44">
       <div className="rounded-lg bg-white px-8 py-6 drop-shadow-sm">
