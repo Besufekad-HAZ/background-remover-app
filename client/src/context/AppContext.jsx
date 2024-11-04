@@ -46,6 +46,8 @@ const AppContextProvider = (props) => {
       setImage(image);
       setResultImage(false);
       navigate("/result");
+
+      const token = await getToken();
     } catch (error) {
       console.error(error);
       toast.error(error.message);
