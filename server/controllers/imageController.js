@@ -15,7 +15,11 @@ const removeBackground = async (req, res) => {
     }
 
     if (user.creditBalance <= 0) {
-      return res.json({ success: false, message: "Insufficient credits", credits: user.creditBalance });
+      return res.json({
+        success: false,
+        message: "Insufficient credits",
+        credits: user.creditBalance,
+      });
     }
 
     const imagePath = req.file.path;
@@ -23,6 +27,9 @@ const removeBackground = async (req, res) => {
     // Reading the image file
     const imageFile = fs.createReadStream(imagePath);
 
+    const formData = new FormData();
+    formData.append("image", imageFile);
+    
   } catch (error) {
     console.log(error.message);
     res.json({ success: false, message: error.message });
