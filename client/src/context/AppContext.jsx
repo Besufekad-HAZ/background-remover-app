@@ -62,6 +62,7 @@ const AppContextProvider = (props) => {
 
       if (data.success) {
         setResultImage(data.resultImage);
+        data.creditBalance && setCredit(data.creditBalance);
       }
     } catch (error) {
       console.error(error);
