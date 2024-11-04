@@ -8,7 +8,7 @@ const removeBackground = async (req, res) => {
   try {
     const { clerkId } = req.body;
 
-    const user = await userModel.findById(clerkId);
+    const user = await userModel.findOne({ clerkId });
 
     if (!user) {
       return res.json({ success: false, message: "User not found" });
