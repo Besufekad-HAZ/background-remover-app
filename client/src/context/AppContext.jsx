@@ -61,7 +61,7 @@ const AppContextProvider = (props) => {
       );
 
       if (data.success) {
-        setResultImage(data.image);
+        setResultImage(data.resultImage);
       }
     } catch (error) {
       console.error(error);
