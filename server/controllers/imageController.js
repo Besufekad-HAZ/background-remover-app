@@ -9,6 +9,10 @@ const removeBackground = async (req, res) => {
     const { clerkId } = req.body;
 
     const user = await userModel.findById(clerkId);
+
+    if (!user) {
+      return res.json({ success: false, message: "User not found" });
+    }
   } catch (error) {
     console.log(error.message);
     res.json({ success: false, message: error.message });
