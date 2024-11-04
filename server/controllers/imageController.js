@@ -50,9 +50,6 @@ const removeBackground = async (req, res) => {
       creditBalance: user.creditBalance - 1,
     }); // Update user's credit balance
 
-    user.creditBalance = user.creditBalance - 1;
-    await user.save();
-
     res.json({
       success: true,
       resultImage,
