@@ -41,6 +41,8 @@ const removeBackground = async (req, res) => {
         responseType: "arraybuffer",
       }
     );
+
+    const base64Image = Buffer.from(data, "binary").toString("base64"); // Convert to base64 string
   } catch (error) {
     console.log(error.message);
     res.json({ success: false, message: error.message });
