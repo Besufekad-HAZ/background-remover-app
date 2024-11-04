@@ -15,9 +15,9 @@ const removeBackground = async (req, res) => {
     }
 
     if (user.creditBalance <= 0) {
-      return res.json({ success: false, message: "Insufficient credits" });
+      return res.json({ success: false, message: "Insufficient credits", credits: user.creditBalance });
     }
-    
+
   } catch (error) {
     console.log(error.message);
     res.json({ success: false, message: error.message });
