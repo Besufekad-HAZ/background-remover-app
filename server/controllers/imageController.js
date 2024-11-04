@@ -36,7 +36,7 @@ const removeBackground = async (req, res) => {
       formData,
       {
         headers: {
-          "x-api-key": YOUR_API_KEY,
+          "x-api-key": process.env.CLIPDROP_API,
         },
         body: form,
       }
