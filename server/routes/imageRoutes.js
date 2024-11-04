@@ -1,7 +1,7 @@
 import express from "express";
 import { removeBackground } from "../controllers/imageController.js";
 import { upload } from "../middlewares/multer.js";
-import authUser from "../middlewares/authUser.js";
+import authUser from "../middlewares/auth.js";
 
 const imageRouter = express.Router();
 
@@ -13,4 +13,3 @@ imageRouter.post(
 );
 
 export default imageRouter;
-
