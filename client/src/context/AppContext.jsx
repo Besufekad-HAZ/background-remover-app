@@ -45,7 +45,6 @@ const AppContextProvider = (props) => {
       }
       setImage(image);
       setResultImage(false);
-      navigate("/result");
 
       const token = await getToken();
 
@@ -60,12 +59,16 @@ const AppContextProvider = (props) => {
         },
       );
 
+      console.log(data); // Log the entire response to check its structure
+
       if (data.success) {
         setResultImage(data.resultImage);
         data.creditBalance && setCredit(data.creditBalance);
+        navigate("/result");
       } else {
         toast.error(data.message);
         data.creditBalance && setCredit(data.creditBalance);
+        console.log(data.creditBalance); // temporary check for data
         if (data.creditBalance === 0) {
           navigate("/buy");
         }

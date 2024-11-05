@@ -14,11 +14,11 @@ const removeBackground = async (req, res) => {
       return res.json({ success: false, message: "User not found" });
     }
 
-    if (user.creditBalance <= 0) {
+    if (user.creditBalance === 0) {
       return res.json({
         success: false,
         message: "Insufficient credits",
-        credits: user.creditBalance,
+        creditBalance: user.creditBalance,
       });
     }
 
