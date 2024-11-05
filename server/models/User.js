@@ -27,6 +27,26 @@ const userSchema = new mongoose.Schema({
     type: Number,
     default: 5,
   },
+  pendingPayments: [
+    {
+      tx_ref: {
+        type: String,
+        required: true,
+      },
+      amount: {
+        type: Number,
+        required: true,
+      },
+      credits: {
+        type: Number,
+        required: true,
+      },
+      status: {
+        type: String,
+        default: "pending",
+      },
+    },
+  ],
 });
 
 const userModel = mongoose.model.user || mongoose.model("User", userSchema);
