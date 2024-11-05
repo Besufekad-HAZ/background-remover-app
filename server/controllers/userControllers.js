@@ -68,31 +68,4 @@ const userCredits = async (req, res) => {
   }
 };
 
-// Create a Controller function that would initizalize the Razorpay payment gateway
-const razorpayInit = async (req, res) => {
-  try {
-    const { clerkId, amount } = req.body;
-    const userData = await userModel.findOne({ clerkId });
-    if (!userData) {
-      return res.json({ success: false, message: "User not found" });
-    }
-    const instance = new Razorpay({
-      key_id: process.env.RAZORPAY_KEY_ID,
-      key_secret: process.env.RAZORPAY_KEY_SECRET,
-    });
-    const options = {
-      amount: amount * 100,
-      currency: "INR",
-      receipt: `${Date.now()}`,
-    };
-    const order = await instance.orders.create(options);
-    res.json({ success: true, order });
-  } catch (error) {
-    console.log(error.message);
-    res.json({ success: false, message: error.message });
-  }
-};
-
-// Create a Controller function that would handle the payment success and update the user credits
-
 export { clerkWebhooks, userCredits };
