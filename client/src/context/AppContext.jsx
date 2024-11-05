@@ -28,7 +28,6 @@ const AppContextProvider = (props) => {
       });
       if (data.success) {
         setCredit(data.credits);
-        console.log(data.credits); // temporary check for data
       }
     } catch (error) {
       console.error(error);
@@ -59,7 +58,6 @@ const AppContextProvider = (props) => {
         },
       );
 
-      console.log(data); // Log the entire response to check its structure
 
       if (data.success) {
         setResultImage(data.resultImage);
@@ -68,7 +66,6 @@ const AppContextProvider = (props) => {
       } else {
         toast.error(data.message);
         data.creditBalance && setCredit(data.creditBalance);
-        console.log(data.creditBalance); // temporary check for data
         if (data.creditBalance === 0) {
           navigate("/buy");
         }
@@ -80,7 +77,7 @@ const AppContextProvider = (props) => {
   };
 
   const value = {
-    // Add your context values here
+    // context values here
     credit,
     setCredit,
     loadCreditsData,
