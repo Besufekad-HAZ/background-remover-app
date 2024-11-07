@@ -3,9 +3,11 @@ import mongoose from "mongoose";
 
 const paymentSchema = new mongoose.Schema({
   tx_ref: String,
-  amount: Number,
-  credits: Number,
+  amount: { type: Number, required: true },
+  credits: { type: Number, required: true },
   status: String,
+  date: { type: Date, default: Date.now },
+  payment: { type: boolean, default: false },
 });
 
 const userSchema = new mongoose.Schema({
