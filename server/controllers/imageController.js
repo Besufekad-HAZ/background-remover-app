@@ -22,6 +22,14 @@ const removeBackground = async (req, res) => {
       });
     }
 
+    if (user.creditBalance >= 45) {
+      return res.json({
+        success: false,
+        message: "Maximum credit limit reached",
+        creditBalance: user.creditBalance,
+      });
+    }
+
     const imagePath = req.file.path;
 
     // Reading the image file
