@@ -32,7 +32,11 @@ const Header = () => {
             className="m-auto inline-flex cursor-pointer gap-3 rounded-full bg-gradient-to-r from-purple-700 to-pink-500 px-8 py-3.5 transition-all duration-700 hover:scale-105"
             htmlFor="upload1"
           >
-            <img width={20} src={assets.upload_btn_icon} alt="" />
+            <img
+              width={20}
+              src={assets.upload_btn_icon}
+              alt="image upload icon"
+            />
             <p className="text-sm text-white">Upload your image</p>
           </label>
         </div>

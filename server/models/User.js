@@ -1,13 +1,11 @@
-// models/User.js
 import mongoose from "mongoose";
 
 const paymentSchema = new mongoose.Schema({
-  tx_ref: String,
+  tx_ref: { type: String, required: true },
   amount: { type: Number, required: true },
   credits: { type: Number, required: true },
-  status: String,
+  status: { type: String, default: "pending" },
   date: { type: Date, default: Date.now },
-  payment: { type: Boolean, default: false },
 });
 
 const userSchema = new mongoose.Schema({
@@ -31,6 +29,6 @@ const userSchema = new mongoose.Schema({
   pendingPayments: [paymentSchema],
 });
 
-const userModel = mongoose.model.user || mongoose.model("User", userSchema);
+const userModel = mongoose.model("User", userSchema);
 
 export default userModel;
