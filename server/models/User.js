@@ -7,7 +7,7 @@ const paymentSchema = new mongoose.Schema({
   credits: { type: Number, required: true },
   status: String,
   date: { type: Date, default: Date.now },
-  payment: { type: boolean, default: false },
+  payment: { type: Boolean, default: false },
 });
 
 const userSchema = new mongoose.Schema({
