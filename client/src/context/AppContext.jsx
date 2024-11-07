@@ -75,6 +75,7 @@ const AppContextProvider = (props) => {
   };
 
   const value = {
+    // context values here
     credit,
     setCredit,
     loadCreditsData,

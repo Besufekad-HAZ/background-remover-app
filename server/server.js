@@ -30,7 +30,6 @@ app.use("/api/user", userRouter);
 app.use("/api/image", imageRouter);
 app.use("/api/payment", paymentRouter);
 
-
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
