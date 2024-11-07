@@ -29,7 +29,7 @@ const removeBackground = async (req, res) => {
         creditBalance: user.creditBalance,
       });
     }
-
+    
     const imagePath = req.file.path;
 
     // Reading the image file

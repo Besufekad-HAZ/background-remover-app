@@ -28,7 +28,6 @@ const AppContextProvider = (props) => {
       });
       if (data.success) {
         setCredit(data.credits);
-        console.log(data.credits); // temporary check for data
       }
     } catch (error) {
       console.error(error);
@@ -76,6 +75,7 @@ const AppContextProvider = (props) => {
   };
 
   const value = {
+    // context values here
     credit,
     setCredit,
     loadCreditsData,
