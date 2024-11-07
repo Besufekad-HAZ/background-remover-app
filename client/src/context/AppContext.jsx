@@ -38,7 +38,6 @@ const AppContextProvider = (props) => {
 
   const removeBg = async (image) => {
     try {
-      // Implement the removeBg function here
       if (!isSignedIn) {
         toast.error("Please sign in to use this feature");
         return openSignIn();
@@ -46,6 +45,30 @@ const AppContextProvider = (props) => {
       setImage(image);
       setResultImage(false);
       navigate("/result");
+
+      const token = await getToken();
+
+      const formData = new FormData();
+      image && formData.append("image", image);
+
+      const { data } = await axios.post(
+        backendUrl + "/api/image/remove-bg",
+        formData,
+        {
+          headers: { token },
+        },
+      );
+
+      if (data.success) {
+        setResultImage(data.resultImage);
+        data.creditBalance && setCredit(data.creditBalance);
+      } else {
+        toast.error(data.message);
+        data.creditBalance && setCredit(data.creditBalance);
+        if (data.creditBalance === 0) {
+          navigate("/buy");
+        }
+      }
     } catch (error) {
       console.error(error);
       toast.error(error.message);
@@ -53,7 +76,6 @@ const AppContextProvider = (props) => {
   };
 
   const value = {
-    // Add your context values here
     credit,
     setCredit,
     loadCreditsData,
@@ -62,6 +84,7 @@ const AppContextProvider = (props) => {
     setImage,
     removeBg,
     resultImage,
+    setResultImage,
   };
 
   return (

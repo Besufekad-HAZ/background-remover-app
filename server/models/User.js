@@ -29,6 +29,6 @@ const userSchema = new mongoose.Schema({
   pendingPayments: [paymentSchema],
 });
 
-const userModel = mongoose.model("User", userSchema);
+const userModel = mongoose.model.user || mongoose.model("User", userSchema);
 
 export default userModel;
