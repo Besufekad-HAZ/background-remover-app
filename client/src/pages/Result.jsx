@@ -33,7 +33,7 @@ const Result = () => {
             <div className="bg-layer relative h-full overflow-hidden rounded-md border-gray-300">
               <img
                 width={500}
-                src={resultImage ? resultImage : assets.image_wo_bg}
+                src={resultImage ? resultImage : ""}
                 alt="Background Removed Image"
               />
               {!resultImage && image && (
