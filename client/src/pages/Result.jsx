@@ -1,8 +1,13 @@
-import { useContext } from "react";
-// import { assets } from "../assets/assets";
+import { useContext, useRef } from "react";
 import { AppContext } from "../context/AppContext";
+import { assets } from "../assets/assets";
 const Result = () => {
-  const { resultImage, image } = useContext(AppContext);
+  const { resultImage, image, removeBg } = useContext(AppContext);
+  const fileInputRef = useRef(null);
+
+  const handleTryAnotherImage = () => {
+    fileInputRef.current.click();
+  };
   return (
     <div className="mx-4 my-3 mt-14 min-h-[75vh] lg:mx-44">
       <div className="rounded-lg bg-white px-8 py-6 drop-shadow-sm">
@@ -15,7 +20,7 @@ const Result = () => {
             <img
               className="rounded-md border"
               width={500}
-              src={image ? URL.createObjectURL(image) : ""}
+              src={image ? URL.createObjectURL(image) : assets.image_w_bg}
               alt="Original Image"
             />
           </div>
@@ -42,9 +47,26 @@ const Result = () => {
         {/* Buttons */}
         {resultImage && (
           <div className="mt-6 flex flex-wrap items-center justify-center gap-4 sm:justify-end">
-            <button className="rounded-full border border-violet-600 px-8 py-2.5 text-sm text-violet-600 transition-all duration-700 hover:scale-105">
+            {/* Hidden File Input */}
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept="image/*"
+              onChange={(e) => {
+                if (e.target.files && e.target.files[0]) {
+                  removeBg(e.target.files[0]);
+                }
+              }}
+              hidden
+            />
+            {/* Try Another Image Button */}
+            <button
+              className="rounded-full border border-violet-600 px-8 py-2.5 text-sm text-violet-600 transition-all duration-700 hover:scale-105"
+              onClick={handleTryAnotherImage}
+            >
               Try another image
             </button>
+            {/* Download Button */}
             <a
               className="rounded-full bg-gradient-to-r from-violet-600 to-fuchsia-500 px-8 py-2.5 text-sm text-white transition-all duration-700 hover:scale-105"
               href={resultImage}

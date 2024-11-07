@@ -8,9 +8,27 @@ const Footer = () => {
         © 2024 Remove Background. All rights reserved.
       </p>
       <div className="flex gap-1">
-        <img width={40} src={assets.facebook_icon} alt="facebook icon" />
-        <img width={40} src={assets.twitter_icon} alt="twitter icon" />
-        <img width={40} src={assets.google_plus_icon} alt="googl plus icon" />
+        <a
+          href="https://web.facebook.com/besufekad.alemu.1"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img width={48} src={assets.facebook_icon} alt="Facebook icon" />
+        </a>
+        <a
+          href="https://www.linkedin.com/in/besufekadalemu/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img width={40} src={assets.linkedIn_icon} alt="LinkedIn icon" />
+        </a>
+        <a
+          href="https://github.com/Besufekad-HAZ"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <img width={40} src={assets.github_icon} alt="Github icon" />
+        </a>
       </div>
     </div>
   );

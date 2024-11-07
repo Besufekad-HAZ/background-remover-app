@@ -37,13 +37,13 @@ const AppContextProvider = (props) => {
 
   const removeBg = async (image) => {
     try {
-      // Implement the removeBg function here
       if (!isSignedIn) {
         toast.error("Please sign in to use this feature");
         return openSignIn();
       }
       setImage(image);
       setResultImage(false);
+      navigate("/result");
 
       const token = await getToken();
 
@@ -58,11 +58,9 @@ const AppContextProvider = (props) => {
         },
       );
 
-
       if (data.success) {
         setResultImage(data.resultImage);
         data.creditBalance && setCredit(data.creditBalance);
-        navigate("/result");
       } else {
         toast.error(data.message);
         data.creditBalance && setCredit(data.creditBalance);
