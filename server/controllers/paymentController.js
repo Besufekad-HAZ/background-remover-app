@@ -1,3 +1,4 @@
+// paymentController.js
 import axios from "axios";
 import userModel from "../models/User.js";
 
@@ -5,8 +6,23 @@ const initializePayment = async (req, res) => {
   try {
     const { amount, email, first_name, last_name, clerkId, credits } = req.body;
 
-    const tx_ref = `tx-${Date.now()}-${Math.floor(Math.random() * 1000000)}`;
+    if (
+      !amount ||
+      !email ||
+      !first_name ||
+      !last_name ||
+      !clerkId ||
+      !credits
+    ) {
+      return res
+        .status(400)
+        .json({ success: false, message: "Missing required fields" });
+    }
 
+    const tx_ref = `tx-${Date.now()}-${Math.floor(Math.random() * 1000000)}`;
+    const callback_url = `${process.env.BACKEND_URL}/api/payment/verify`;
+
+    // Initialize payment with Chapa
     const response = await axios.post(
       "https://api.chapa.co/v1/transaction/initialize",
       {
@@ -16,7 +32,7 @@ const initializePayment = async (req, res) => {
         first_name,
         last_name,
         tx_ref,
-        callback_url: `${process.env.BACKEND_URL}/api/payment/verify`,
+        callback_url,
         return_url: `${process.env.FRONTEND_URL}/payment/success`,
         customization: {
           title: "Credit Purchase",
@@ -26,11 +42,12 @@ const initializePayment = async (req, res) => {
       {
         headers: {
           Authorization: `Bearer ${process.env.CHAPA_SECRET_KEY}`,
+          "Content-Type": "application/json",
         },
       }
     );
 
-    // Store payment intent in database
+    // Save the payment intent to the user's pendingPayments
     await userModel.findOneAndUpdate(
       { clerkId },
       {
@@ -42,7 +59,8 @@ const initializePayment = async (req, res) => {
             status: "pending",
           },
         },
-      }
+      },
+      { new: true, upsert: true }
     );
 
     res.json({
@@ -50,10 +68,13 @@ const initializePayment = async (req, res) => {
       checkout_url: response.data.data.checkout_url,
     });
   } catch (error) {
-    console.error(error);
+    console.error(
+      "Payment initialization error:",
+      error.response?.data || error.message
+    );
     res.status(500).json({
       success: false,
-      message: error.message,
+      message: "Payment initialization failed",
     });
   }
 };
@@ -72,22 +93,24 @@ const verifyPayment = async (req, res) => {
       }
     );
 
-    if (response.data.status === "success") {
-      // Find user with pending payment
+    if (
+      response.data.status === "success" &&
+      response.data.data.status === "success"
+    ) {
+      // Payment was successful
       const user = await userModel.findOne({
         "pendingPayments.tx_ref": tx_ref,
       });
 
       if (!user) {
-        return res.status(404).json({
-          success: false,
-          message: "Payment not found",
-        });
+        return res
+          .status(404)
+          .json({ success: false, message: "User not found" });
       }
 
       const payment = user.pendingPayments.find((p) => p.tx_ref === tx_ref);
 
-      // Update user credits
+      // Update user's credit balance and remove the pending payment
       await userModel.findByIdAndUpdate(user._id, {
         $inc: { creditBalance: payment.credits },
         $pull: { pendingPayments: { tx_ref } },
@@ -98,7 +121,10 @@ const verifyPayment = async (req, res) => {
       res.redirect(`${process.env.FRONTEND_URL}/payment/failed`);
     }
   } catch (error) {
-    console.error(error);
+    console.error(
+      "Payment verification error:",
+      error.response?.data || error.message
+    );
     res.redirect(`${process.env.FRONTEND_URL}/payment/failed`);
   }
 };

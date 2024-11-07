@@ -3,9 +3,11 @@ import Home from "./pages/Home";
 import Result from "./pages/Result";
 import BuyCredit from "./pages/BuyCredit";
 import Navbar from "./components/Navbar";
+import PaymentSuccess from './components/PaymentSuccess';
 import Footer from "./components/Footer";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
 
 const App = () => {
   return (
@@ -16,6 +18,7 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/result" element={<Result />} />
         <Route path="/buy" element={<BuyCredit />} />
+        <Route path="/payment/success" element={<PaymentSuccess />} />
       </Routes>
       <Footer />
     </div>

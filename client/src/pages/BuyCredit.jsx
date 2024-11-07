@@ -1,13 +1,16 @@
+// BuyCredit.jsx
 import { assets, plans } from "../assets/assets";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AppContext } from "../context/AppContext";
-import { useUser } from "@clerk/clerk-react";
+import { useAuth, useUser } from "@clerk/clerk-react";
 import axios from "axios";
 import { toast } from "react-toastify";
 
 const BuyCredit = () => {
-  const { backendUrl, loadCreditsData } = useContext(AppContext);
+  const { backendUrl } = useContext(AppContext);
   const { user, isSignedIn } = useUser();
+  const { getToken } = useAuth();
+  const [loading, setLoading] = useState(false);
 
   const handlePurchase = async (plan) => {
     try {
@@ -15,6 +18,9 @@ const BuyCredit = () => {
         return toast.error("Please sign in to purchase credits");
       }
 
+      setLoading(true);
+
+      const token = await getToken();
       const { data } = await axios.post(
         `${backendUrl}/api/payment/initialize`,
         {
@@ -25,14 +31,21 @@ const BuyCredit = () => {
           clerkId: user.id,
           credits: plan.credits,
         },
+        {
+          headers: { token },
+        },
       );
 
       if (data.success) {
         window.location.href = data.checkout_url;
+      } else {
+        toast.error("Payment initialization failed");
       }
     } catch (error) {
-      console.error(error);
-      toast.error(error.message);
+      console.error("Payment initialization error:", error);
+      toast.error("Payment initialization error");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -58,10 +71,11 @@ const BuyCredit = () => {
               {item.credits} credits
             </p>
             <button
-              onClick={() => handlePurchase(item)}
               className="mt-8 w-full min-w-52 rounded-md bg-gray-800 py-2.5 text-sm text-white"
+              onClick={() => handlePurchase(item)}
+              disabled={loading}
             >
-              Purchase
+              {loading ? "Processing..." : "Purchase"}
             </button>
           </div>
         ))}
