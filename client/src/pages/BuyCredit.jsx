@@ -1,6 +1,41 @@
 import { assets, plans } from "../assets/assets";
+import { useContext } from "react";
+import { AppContext } from "../context/AppContext";
+import { useUser } from "@clerk/clerk-react";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 const BuyCredit = () => {
+  const { backendUrl, loadCreditsData } = useContext(AppContext);
+  const { user, isSignedIn } = useUser();
+
+  const handlePurchase = async (plan) => {
+    try {
+      if (!isSignedIn) {
+        return toast.error("Please sign in to purchase credits");
+      }
+
+      const { data } = await axios.post(
+        `${backendUrl}/api/payment/initialize`,
+        {
+          amount: plan.price,
+          email: user.primaryEmailAddress.emailAddress,
+          first_name: user.firstName,
+          last_name: user.lastName,
+          clerkId: user.id,
+          credits: plan.credits,
+        },
+      );
+
+      if (data.success) {
+        window.location.href = data.checkout_url;
+      }
+    } catch (error) {
+      console.error(error);
+      toast.error(error.message);
+    }
+  };
+
   return (
     <div className="mb-10 min-h-[80vh] pt-14 text-center">
       <button className="mb-6 rounded-full border border-gray-400 px-10 py-2">
@@ -10,7 +45,6 @@ const BuyCredit = () => {
         Choose the plan that&apos;s right for you
       </h2>
       <div className="flex flex-wrap justify-center gap-6 text-left">
-        {/* Plans */}
         {plans.map((item, index) => (
           <div
             key={index}
@@ -23,7 +57,10 @@ const BuyCredit = () => {
               <span className="text-3xl font-medium">${item.price}</span>/{" "}
               {item.credits} credits
             </p>
-            <button className="mt-8 w-full min-w-52 rounded-md bg-gray-800 py-2.5 text-sm text-white">
+            <button
+              onClick={() => handlePurchase(item)}
+              className="mt-8 w-full min-w-52 rounded-md bg-gray-800 py-2.5 text-sm text-white"
+            >
               Purchase
             </button>
           </div>
