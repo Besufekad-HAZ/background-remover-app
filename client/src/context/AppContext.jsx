@@ -28,7 +28,6 @@ const AppContextProvider = (props) => {
       });
       if (data.success) {
         setCredit(data.credits);
-        console.log(data.credits); // temporary check for data
       }
     } catch (error) {
       console.error(error);
@@ -45,7 +44,32 @@ const AppContextProvider = (props) => {
       }
       setImage(image);
       setResultImage(false);
-      navigate("/result");
+
+      const token = await getToken();
+
+      const formData = new FormData();
+      image && formData.append("image", image);
+
+      const { data } = await axios.post(
+        backendUrl + "/api/image/remove-bg",
+        formData,
+        {
+          headers: { token },
+        },
+      );
+
+
+      if (data.success) {
+        setResultImage(data.resultImage);
+        data.creditBalance && setCredit(data.creditBalance);
+        navigate("/result");
+      } else {
+        toast.error(data.message);
+        data.creditBalance && setCredit(data.creditBalance);
+        if (data.creditBalance === 0) {
+          navigate("/buy");
+        }
+      }
     } catch (error) {
       console.error(error);
       toast.error(error.message);
@@ -53,7 +77,7 @@ const AppContextProvider = (props) => {
   };
 
   const value = {
-    // Add your context values here
+    // context values here
     credit,
     setCredit,
     loadCreditsData,
@@ -61,6 +85,8 @@ const AppContextProvider = (props) => {
     image,
     setImage,
     removeBg,
+    resultImage,
+    setResultImage,
   };
 
   return (
