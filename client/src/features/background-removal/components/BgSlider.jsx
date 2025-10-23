@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { assets } from "../assets/assets";
+import { assets } from "@/assets";
 
 const BgSlider = () => {
   const [sliderPosition, setSliderPosition] = useState(50);

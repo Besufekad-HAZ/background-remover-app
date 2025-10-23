@@ -1,7 +1,6 @@
-// components/PaymentSuccess.jsx
 import { useEffect, useContext } from "react";
-import { AppContext } from "../context/AppContext";
 import { useNavigate } from "react-router-dom";
+import { AppContext } from "@/providers/AppContext";
 
 const PaymentSuccess = () => {
   const { loadCreditsData } = useContext(AppContext);
@@ -10,11 +9,12 @@ const PaymentSuccess = () => {
   useEffect(() => {
     loadCreditsData();
     // Redirect to home or credits page after a short delay
-    setTimeout(() => {
+    const timeoutId = setTimeout(() => {
       navigate("/");
     }, 3000);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+
+    return () => clearTimeout(timeoutId);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div className="flex min-h-screen items-center justify-center">

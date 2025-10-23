@@ -1,0 +1,1 @@
+export { removeBackground } from "./removeBackground";

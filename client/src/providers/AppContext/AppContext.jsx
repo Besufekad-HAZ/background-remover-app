@@ -1,18 +1,20 @@
 import { createContext, useState } from "react";
 import PropTypes from "prop-types";
 import { useAuth, useClerk, useUser } from "@clerk/clerk-react";
-import axios from "axios";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { fetchCredits } from "@/features/payments";
+import { removeBackground as removeBackgroundRequest } from "@/features/background-removal";
+import { env } from "@/lib/config/env";
 
 const AppContext = createContext();
 
-const AppContextProvider = (props) => {
+const AppContextProvider = ({ children }) => {
   const [credit, setCredit] = useState(false);
   const [image, setImage] = useState(false);
   const [resultImage, setResultImage] = useState(false);
 
-  const backendUrl = import.meta.env.VITE_BACKEND_URL;
+  const { backendUrl } = env;
 
   const navigate = useNavigate();
 
@@ -22,10 +24,13 @@ const AppContextProvider = (props) => {
 
   const loadCreditsData = async () => {
     try {
+      if (!backendUrl) {
+        console.warn("Missing backend URL; cannot load credits.");
+        return;
+      }
       const token = await getToken();
-      const { data } = await axios.get(`${backendUrl}/api/user/credits`, {
-        headers: { token },
-      });
+      const data = await fetchCredits({ backendUrl, token });
+
       if (data.success) {
         setCredit(data.credits);
       }
@@ -35,28 +40,26 @@ const AppContextProvider = (props) => {
     }
   };
 
-  const removeBg = async (image) => {
+  const removeBg = async (imageFile) => {
     try {
       if (!isSignedIn) {
         toast.error("Please sign in to use this feature");
         return openSignIn();
       }
-      setImage(image);
+      if (!backendUrl) {
+        toast.error("Missing backend configuration");
+        return;
+      }
+      setImage(imageFile);
       setResultImage(false);
       navigate("/result");
 
       const token = await getToken();
-
-      const formData = new FormData();
-      image && formData.append("image", image);
-
-      const { data } = await axios.post(
-        backendUrl + "/api/image/remove-bg",
-        formData,
-        {
-          headers: { token },
-        },
-      );
+      const data = await removeBackgroundRequest({
+        backendUrl,
+        token,
+        image: imageFile,
+      });
 
       if (data.success) {
         setResultImage(data.resultImage);
@@ -75,7 +78,6 @@ const AppContextProvider = (props) => {
   };
 
   const value = {
-    // context values here
     credit,
     setCredit,
     loadCreditsData,
@@ -87,9 +89,7 @@ const AppContextProvider = (props) => {
     setResultImage,
   };
 
-  return (
-    <AppContext.Provider value={value}>{props.children}</AppContext.Provider>
-  );
+  return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 };
 
 AppContextProvider.propTypes = {

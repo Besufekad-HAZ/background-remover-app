@@ -1,7 +1,8 @@
 import { useContext, useRef } from "react";
-import { AppContext } from "../context/AppContext";
-import { assets } from "../assets/assets";
-const Result = () => {
+import { AppContext } from "@/providers/AppContext";
+import { assets } from "@/assets";
+
+const ResultPage = () => {
   const { resultImage, image, removeBg } = useContext(AppContext);
   const fileInputRef = useRef(null);
 
@@ -81,4 +82,4 @@ const Result = () => {
   );
 };
 
-export default Result;
+export default ResultPage;

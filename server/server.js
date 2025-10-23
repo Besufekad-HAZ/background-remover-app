@@ -14,12 +14,41 @@ await connectDB();
 
 // Initialize Middlewares
 app.use(express.json());
-app.use(
-  cors({
-    origin: process.env.FRONTEND_URL,
-    credentials: true,
-  })
+
+const rawOrigins = [
+  process.env.FRONTEND_URL,
+  process.env.FRONTEND_URL_SECONDARY,
+  process.env.FRONTEND_URLS,
+  "http://localhost:5173",
+  "https://localhost:5173",
+];
+
+const allowedOrigins = Array.from(
+  new Set(
+    rawOrigins
+      .filter(Boolean)
+      .flatMap((value) => value.split(","))
+      .map((origin) => origin.trim())
+      .filter(Boolean)
+  )
 );
+
+const corsOptions = {
+  credentials: true,
+  origin(origin, callback) {
+    if (!origin) {
+      return callback(null, true);
+    }
+
+    if (allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    }
+
+    callback(new Error(`Origin ${origin} not allowed by CORS configuration.`));
+  },
+};
+
+app.use(cors(corsOptions));
 
 // API Endpoints
 app.get("/", (req, res) => {

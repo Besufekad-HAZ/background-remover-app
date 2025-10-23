@@ -1,12 +1,11 @@
-// BuyCredit.jsx
-import { assets, plans } from "../assets/assets";
 import { useContext, useState } from "react";
-import { AppContext } from "../context/AppContext";
 import { useAuth, useUser } from "@clerk/clerk-react";
-import axios from "axios";
 import { toast } from "react-toastify";
+import { assets, plans } from "@/assets";
+import { AppContext } from "@/providers/AppContext";
+import { initializePayment } from "@/features/payments";
 
-const BuyCredit = () => {
+const BuyCreditPage = () => {
   const { backendUrl } = useContext(AppContext);
   const { user, isSignedIn } = useUser();
   const { getToken } = useAuth();
@@ -17,13 +16,17 @@ const BuyCredit = () => {
       if (!isSignedIn) {
         return toast.error("Please sign in to purchase credits");
       }
+      if (!backendUrl) {
+        return toast.error("Missing backend configuration");
+      }
 
       setLoading(true);
 
       const token = await getToken();
-      const { data } = await axios.post(
-        `${backendUrl}/api/payment/initialize`,
-        {
+      const data = await initializePayment({
+        backendUrl,
+        token,
+        payload: {
           amount: plan.price,
           email: user.primaryEmailAddress.emailAddress,
           first_name: user.firstName,
@@ -31,10 +34,7 @@ const BuyCredit = () => {
           clerkId: user.id,
           credits: plan.credits,
         },
-        {
-          headers: { token },
-        },
-      );
+      });
 
       if (data.success) {
         window.location.href = data.checkout_url;
@@ -84,4 +84,4 @@ const BuyCredit = () => {
   );
 };
 
-export default BuyCredit;
+export default BuyCreditPage;

@@ -1,4 +1,4 @@
-import { testimonialsData } from "../assets/assets";
+import { testimonialsData } from "@/assets";
 
 const Testimonials = () => {
   return (

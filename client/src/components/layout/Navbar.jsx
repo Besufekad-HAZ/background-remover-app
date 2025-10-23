@@ -1,11 +1,10 @@
 import { useClerk, UserButton, useUser } from "@clerk/clerk-react";
-import { assets } from "../assets/assets";
-import { Link, useNavigate } from "react-router-dom";
 import { useContext, useEffect } from "react";
-import { AppContext } from "../context/AppContext";
+import { Link, useNavigate } from "react-router-dom";
+import { assets } from "@/assets";
+import { AppContext } from "@/providers/AppContext";
 const Navbar = () => {
   const { openSignIn } = useClerk();
-  // eslint-disable-next-line no-unused-vars
   const { isSignedIn, user } = useUser();
   const { credit, loadCreditsData } = useContext(AppContext);
 

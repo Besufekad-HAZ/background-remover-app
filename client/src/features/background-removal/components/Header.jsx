@@ -1,6 +1,6 @@
 import { useContext } from "react";
-import { assets } from "../assets/assets";
-import { AppContext } from "../context/AppContext";
+import { assets } from "@/assets";
+import { AppContext } from "@/providers/AppContext";
 
 const Header = () => {
   const { removeBg } = useContext(AppContext);

@@ -19,12 +19,12 @@
   appearance: none;
   width: 30px;
   min-height: 30px;
-  background-image: url(./assets/slide_icon.svg);
+  background-image: url("../assets/slide_icon.svg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
 }
 
 .bg-layer {
-  background-image: url(./assets/bg_layer.png);
+  background-image: url("../assets/bg_layer.png");
 }
