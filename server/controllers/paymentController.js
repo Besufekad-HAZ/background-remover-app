@@ -6,12 +6,7 @@ const initializePayment = async (req, res) => {
   try {
     const { amount, email, first_name, last_name, clerkId, credits } = req.body;
 
-    if (
-      !amount ||
-      !email ||
-      !clerkId ||
-      !credits
-    ) {
+    if (!amount || !email || !clerkId || !credits) {
       return res
         .status(400)
         .json({ success: false, message: "Missing required fields" });
@@ -90,14 +85,17 @@ const initializePayment = async (req, res) => {
 const verifyPayment = async (req, res) => {
   try {
     const { tx_ref } = req.query;
+    console.log("Payment verification started for tx_ref:", tx_ref);
 
     if (!tx_ref) {
+      console.log("Missing transaction reference");
       return res
         .status(400)
         .json({ success: false, message: "Transaction reference is missing" });
     }
 
     // Verify payment with Chapa
+    console.log("Verifying payment with Chapa API...");
     const response = await axios.get(
       `https://api.chapa.co/v1/transaction/verify/${tx_ref}`,
       {
@@ -106,6 +104,8 @@ const verifyPayment = async (req, res) => {
         },
       }
     );
+
+    console.log("Chapa API response:", response.data);
 
     const chapaStatus = response.data.status;
     const chapaData = response.data.data;
@@ -138,7 +138,14 @@ const verifyPayment = async (req, res) => {
       }
 
       // Update user's credit balance and mark payment as successful
-      await userModel.updateOne(
+      console.log("Updating user credits:", {
+        userId: user._id,
+        currentCredits: user.creditBalance,
+        addingCredits: payment.credits,
+        newTotal: user.creditBalance + payment.credits,
+      });
+
+      const updateResult = await userModel.updateOne(
         { _id: user._id, "pendingPayments.tx_ref": tx_ref },
         {
           $inc: { creditBalance: payment.credits },
@@ -146,6 +153,7 @@ const verifyPayment = async (req, res) => {
         }
       );
 
+      console.log("Credit update result:", updateResult);
       res.redirect(`${process.env.FRONTEND_URL}/payment/success`);
     } else {
       // Payment failed or was canceled

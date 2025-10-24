@@ -67,6 +67,13 @@ const userCredits = async (req, res) => {
         .json({ success: false, message: "User not found" });
     }
 
+    // Add cache-busting headers to prevent 304 responses
+    res.set({
+      "Cache-Control": "no-cache, no-store, must-revalidate",
+      Pragma: "no-cache",
+      Expires: "0",
+    });
+
     res.json({ success: true, credits: userData.creditBalance });
   } catch (error) {
     console.error("Error fetching user credits:", error.message);

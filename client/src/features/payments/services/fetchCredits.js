@@ -3,6 +3,8 @@ import axios from "axios";
 export const fetchCredits = async ({ backendUrl, token }) => {
   const { data } = await axios.get(`${backendUrl}/api/user/credits`, {
     headers: { token },
+    // Add cache-busting parameter
+    params: { t: Date.now() }
   });
 
   return data;
