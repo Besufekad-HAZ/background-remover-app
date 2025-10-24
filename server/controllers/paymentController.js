@@ -9,8 +9,6 @@ const initializePayment = async (req, res) => {
     if (
       !amount ||
       !email ||
-      !first_name ||
-      !last_name ||
       !clerkId ||
       !credits
     ) {
@@ -18,6 +16,10 @@ const initializePayment = async (req, res) => {
         .status(400)
         .json({ success: false, message: "Missing required fields" });
     }
+
+    // Handle cases where first_name or last_name might be null/undefined for OAuth users
+    const firstName = first_name || "User";
+    const lastName = last_name || "";
 
     const tx_ref = `tx-${Date.now()}-${Math.floor(Math.random() * 1000000)}`;
     const callback_url = `${process.env.BACKEND_URL}/api/payment/verify?tx_ref=${tx_ref}`;
@@ -29,8 +31,8 @@ const initializePayment = async (req, res) => {
         amount,
         currency: "ETB",
         email,
-        first_name,
-        last_name,
+        first_name: firstName,
+        last_name: lastName,
         tx_ref,
         callback_url,
         return_url: `${process.env.FRONTEND_URL}/payment/success`,

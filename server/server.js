@@ -40,7 +40,10 @@ const corsOptions = {
       return callback(null, true);
     }
 
-    if (allowedOrigins.includes(origin)) {
+    const isExplicitlyAllowed = allowedOrigins.includes(origin);
+    const isLocalhost = /^https?:\/\/localhost(:\d+)?$/.test(origin);
+
+    if (isExplicitlyAllowed || isLocalhost) {
       return callback(null, true);
     }
 
@@ -49,6 +52,32 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
+app.options("*", cors(corsOptions));
+
+app.use((req, res, next) => {
+  const requestOrigin = req.get("origin");
+
+  if (requestOrigin) {
+    const isExplicitlyAllowed = allowedOrigins.includes(requestOrigin);
+    const isLocalhost = /^https?:\/\/localhost(:\d+)?$/.test(requestOrigin);
+
+    if (isExplicitlyAllowed || isLocalhost) {
+      res.header("Access-Control-Allow-Origin", requestOrigin);
+      res.header("Access-Control-Allow-Credentials", "true");
+      res.header(
+        "Access-Control-Allow-Headers",
+        "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+      );
+      res.header(
+        "Access-Control-Allow-Methods",
+        "GET, POST, PUT, PATCH, DELETE, OPTIONS"
+      );
+      res.header("Vary", "Origin");
+    }
+  }
+
+  next();
+});
 
 // API Endpoints
 app.get("/", (req, res) => {

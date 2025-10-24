@@ -9,7 +9,7 @@ const BuyCreditPage = () => {
   const { backendUrl } = useContext(AppContext);
   const { user, isSignedIn } = useUser();
   const { getToken } = useAuth();
-  const [loading, setLoading] = useState(false);
+  const [loadingPlan, setLoadingPlan] = useState(null);
 
   const handlePurchase = async (plan) => {
     try {
@@ -20,7 +20,7 @@ const BuyCreditPage = () => {
         return toast.error("Missing backend configuration");
       }
 
-      setLoading(true);
+      setLoadingPlan(plan.id);
 
       const token = await getToken();
       const data = await initializePayment({
@@ -29,8 +29,8 @@ const BuyCreditPage = () => {
         payload: {
           amount: plan.price,
           email: user.primaryEmailAddress.emailAddress,
-          first_name: user.firstName,
-          last_name: user.lastName,
+          first_name: user.firstName || "User",
+          last_name: user.lastName || "",
           clerkId: user.id,
           credits: plan.credits,
         },
@@ -45,7 +45,7 @@ const BuyCreditPage = () => {
       console.error("Payment initialization error:", error);
       toast.error("Payment initialization error");
     } finally {
-      setLoading(false);
+      setLoadingPlan(null);
     }
   };
 
@@ -71,11 +71,11 @@ const BuyCreditPage = () => {
               {item.credits} credits
             </p>
             <button
-              className="mt-8 w-full min-w-52 rounded-md bg-gray-800 py-2.5 text-sm text-white"
+              className="mt-8 w-full min-w-52 rounded-md bg-gray-800 py-2.5 text-sm text-white disabled:opacity-50"
               onClick={() => handlePurchase(item)}
-              disabled={loading}
+              disabled={loadingPlan === item.id}
             >
-              {loading ? "Processing..." : "Purchase"}
+              {loadingPlan === item.id ? "Processing..." : "Purchase"}
             </button>
           </div>
         ))}
